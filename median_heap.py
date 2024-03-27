@@ -17,7 +17,7 @@ class MaxHeap:
     def max_element(self):
         return self.H[1]
     
-        def bubble_up(self, index):
+    def bubble_up(self, index):
         # your code here
         assert index >= 1
         if index == 1:
@@ -72,7 +72,7 @@ class MaxHeap:
             self.H.pop()
             self.bubble_down(1)
             return max_elt
-
+        
 h = MaxHeap()
 print('Inserting: 5, 2, 4, -1 and 7 in that order.')
 h.insert(5)
@@ -141,6 +141,10 @@ class MedianMaintainingHeap:
             assert self.hmin.size() == 1, 'Sizes are not balanced'
             return self.hmin.min_element()
         # your code here
+        if self.hmax.size() == self.hmin.size():
+            return (self.hmax.max_element() + self.hmin.min_element()) / 2
+        if self.hmax.size() + 1 == self.hmin.size():
+            return self.hmin.min_element()
         
     
     # function: balance_heap_sizes
@@ -150,6 +154,13 @@ class MedianMaintainingHeap:
     # This function could be called from insert/delete_median methods
     def balance_heap_sizes(self):
         # your code here
+        if self.hmax.size() != self.hmin.size() or self.hmax.size()+1 != self.hmin.size():
+            while self.hmax.size() > self.hmin.size():
+                self.hmin.insert(self.hmax.max_element())
+                self.hmax.delete_max()
+            while self.hmin.size() > self.hmax.size()+1:
+                self.hmax.insert(self.hmin.min_element())
+                self.hmin.delete_min()
         
     
     def insert(self, elt):
@@ -174,6 +185,11 @@ class MedianMaintainingHeap:
             return 
         # Now assume both heaps are non-empty
         # your code here
+        if elt >= self.hmax.max_element():
+            self.hmin.insert(elt)
+        else:
+            self.hmax.insert(elt)
+        self.balance_heap_sizes()
         
         
     def delete_median(self):
