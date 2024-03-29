@@ -11,7 +11,7 @@ def quicksort(items):
   more_than_pivot = [x for x in items if x > pivot]
   return quicksort(less_than_pivot) + equal_to_pivot + quicksort(more_than_pivot)
 
-n = 1000000
+n = 10**6
 rand_list = [random.randint(1, n) for _ in range(n)]
 start = time.perf_counter()
 quicksort(rand_list)
