@@ -6,4 +6,4 @@ with open('war_and_peace.txt', 'r', encoding='utf-8') as f:
         text += l.lower()
 
 c = Counter(text.split())
-print(c['filial'])
+print(c.most_common(50))
