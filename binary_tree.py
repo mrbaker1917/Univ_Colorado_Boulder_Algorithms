@@ -95,3 +95,22 @@ print(node7.leftChild)
 
 print("right child of the node is:")
 print(node7.rightChild)
+
+
+def find_minimum(root):
+    # if left child of the root is None, then root is the minimum value
+    if root.leftChild is None:
+        return root
+    # else recursively find the minimum value in the left subtree
+    return find_minimum(root.leftChild)
+
+print(f"The minimum value in the tree is {find_minimum(node1).data}!")
+
+def find_maximum(root):
+    # if right child of the root is None, then root is the maximum value
+    if root.rightChild is None:
+        return root
+    # else recursively find the maximum value in the right subtree
+    return find_maximum(root.rightChild)
+
+print(f"The maximum value in the tree is {find_maximum(node1).data}!")
